@@ -8,12 +8,14 @@ import { PostService } from './services/post.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { DetailPostComponent } from './components/detail-post/detail-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListPostComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DetailPostComponent
   ],
   imports: [
     CommonModule,

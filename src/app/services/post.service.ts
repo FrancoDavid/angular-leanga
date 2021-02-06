@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Post } from '../interfaces/post';
 import { environment } from '../../environments/environment'; 
-import { retry, catchError  } from 'rxjs/operators';
+import { retry, catchError, map  } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,15 @@ export class PostService {
 
   getPost(): Observable<Array<Post>> {
     return this._http.get<Array<Post>>(this._API + '/posts')
+      .pipe(
+        map((posts: Array<Post>) => posts.slice(0, 10)),
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  getDetailPost(id_posts: number): Observable<Post> {
+    return this._http.get<Post>(this._API + '/posts/'+ id_posts)
       .pipe(
         retry(1),
         catchError(this.handleError)
