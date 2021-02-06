@@ -18,10 +18,13 @@ export class DetailPostComponent implements OnInit, OnDestroy {
 
   public loading: boolean;
 
+  public date: string;
+
   constructor(private _activeRoute: ActivatedRoute, private _postService: PostService) {
     this.post =  null;
     this._destroyed$ = new Subject();
     this.loading = true;
+    this.date = '';
   }
 
   ngOnInit(): void {
@@ -37,6 +40,10 @@ export class DetailPostComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroyed$.next();
     this._destroyed$.complete();
+  }
+
+  lastComments($event: string): void {
+    this.date = $event;
   }
 
 }

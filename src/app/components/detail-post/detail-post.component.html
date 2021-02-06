@@ -1,23 +1,25 @@
 <div class="container">
     <div *ngIf="!loading;else loader">
-        <div class="row my-5">
-            <div class="col-sm-12 text-left">
+        <div class="row my-3">
+            <div class="col-sm-6 text-left">
                 <a [routerLink]="['/posts']">&#8592; Volver</a>
-                <h3>Detail Post: {{post.id}}</h3>
+                <h6>Detail Post: {{post.id}}</h6>
+            </div>
+            <div class="col-sm-6 text-rigth">
+                <p>Last comments:   {{date | amDateFormat:'LL'}}</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <h4>{{post.title}}</h4>
+            <div class="col-sm-12 mb-3">
+                <h3>{{post.title}}</h3>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 mb-4">
                 <p>{{post.body}}</p>
             </div>
         </div>
+        <app-comments-post [postID]="post.id" (dateEmitter)="lastComments($event)"></app-comments-post>
     </div>
 </div>
-
-
 <ng-template #loader>
     <div class="row text-center m-5">
         <div class="col-sm-12">

@@ -9,20 +9,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { DetailPostComponent } from './components/detail-post/detail-post.component';
+import { CommentsPostComponent } from './components/comments-post/comments-post.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListPostComponent,
     NotFoundComponent,
-    DetailPostComponent
+    DetailPostComponent,
+    CommentsPostComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
   ],
   providers: [PostService],
   bootstrap: [AppComponent]

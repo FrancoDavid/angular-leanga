@@ -25,8 +25,16 @@ export class PostService {
       )
   }
 
-  getDetailPost(id_posts: number): Observable<Post> {
-    return this._http.get<Post>(this._API + '/posts/'+ id_posts)
+  getDetailPost(id_post: number): Observable<Post> {
+    return this._http.get<Post>(this._API + '/posts/'+ id_post)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  getCommentsPost(id_post: number): Observable<Array<Comment>> {
+    return this._http.get<Array<Comment>>(this._API + '/posts/' + id_post + '/comments')
       .pipe(
         retry(1),
         catchError(this.handleError)
