@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 text-left">
-      <h2 class="my-3">List Posts</h2>
+      <h2 class="my-5">List Posts</h2>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-sm-12">
       <div class="table-response">
         <table class="table">
@@ -15,14 +15,21 @@
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
+          <tbody [hidden]="!listPosts$">
+              <tr *ngFor="let item of listPosts$ | async as list">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.title}}</td>
+                <td><a class="link">Ver</a></td>
+              </tr>
           </tbody>
         </table>
+        <div class="row text-center" [hidden]="listPosts$">
+          <div class="col-sm-12">
+            <div class="spinner-border text-dark" style="width: 3rem; height: 3rem;" role="status" >
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/interfaces/post';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-list-post',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPostComponent implements OnInit {
 
-  constructor() { }
+  public listPosts$: Observable<Array<Post>> = this._postService.getPost();
 
-  ngOnInit(): void {
-  }
+  constructor(private _postService: PostService) { }
+
+  ngOnInit(): void {}
 
 }
