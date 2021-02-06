@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Post } from 'src/app/interfaces/post';
@@ -20,7 +20,7 @@ export class DetailPostComponent implements OnInit, OnDestroy {
 
   public date: string;
 
-  constructor(private _activeRoute: ActivatedRoute, private _postService: PostService) {
+  constructor(private _activeRoute: ActivatedRoute, private _postService: PostService, private _router: Router) {
     this.post =  null;
     this._destroyed$ = new Subject();
     this.loading = true;
@@ -28,13 +28,18 @@ export class DetailPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._postService.getDetailPost(this._activeRoute.snapshot.params.id)
+    const id: number = this._activeRoute.snapshot.params.id;
+    if (!isNaN(id))  {
+      this._postService.getDetailPost(id)
       .pipe(
         takeUntil(this._destroyed$)
       ).subscribe((post: Post) => {
         this.loading = false;
         this.post = post;
       });
+    } else {
+      this._router.navigate(['404']);
+    }
   }
 
   ngOnDestroy(): void {

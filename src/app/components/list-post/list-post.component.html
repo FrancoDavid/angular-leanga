@@ -19,7 +19,7 @@
               <tr *ngFor="let item of listPosts$ | async as list">
                 <th scope="row">{{item.id}}</th>
                 <td>{{item.title}}</td>
-                <td><a class="link" (click)="detail(item.id)">Ver</a></td>
+                <td><a class="link" (click)="detail(item.id)">See</a></td>
               </tr>
           </tbody>
         </table>
